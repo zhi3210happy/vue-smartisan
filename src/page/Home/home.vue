@@ -7,7 +7,7 @@
            @mouseout="bgOut($refs.bg)">
         <span class="img a"></span>
         <span class="text b">以傲慢与偏执<br/>回敬傲慢与偏见</span>
-        <span class="copyright c">code by huzhigang | picture from ali-oss</span>
+        <span class="copyright c">code by zhi3210happy | picture from ali-oss</span>
       </div>
     </div>
 
