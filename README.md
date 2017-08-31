@@ -15,9 +15,9 @@ vue2 + vuex + vue-router + webpack + ES6 + axios + sass + flex + svg + express +
 ## 项目运行
 
 ```txt
-git clone 
+git clone https://github.com/zhi3210happy/vue-smarttisan.git
 
-cd vue-mall
+cd vue-smartisan
 
 cnpm i
 
