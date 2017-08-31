@@ -1,16 +1,17 @@
 var mongoose = require('mongoose')
 var User = require('./../models/user')
 mongoose.connect('mongodb://127.0.0.1:27017/mymall')
-function initAdmin() {
-    User.insertMany({
-        "userId": "9527",
-        "name": "陈二狗",
-        "avatar": "http://zhi3210happy.oss-cn-shanghai.aliyuncs.com/vue-smartisan/default-user-img.png",
-        "userName": "admin",
-        "userPwd": "admin",
-        "orderList": [],
-        "cartList": [],
-        "addressList": []
-    })
+
+function initAdmin () {
+  User.insertMany({
+    'userId': '9527',
+    'name': '陈二狗',
+    'avatar': 'http://zhi3210happy.oss-cn-shanghai.aliyuncs.com/vue-smartisan/default-user-img.png',
+    'userName': 'admin',
+    'userPwd': 'admin',
+    'orderList': [],
+    'cartList': [],
+    'addressList': []
+  })
 }
 module.exports = initAdmin
