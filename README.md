@@ -27,7 +27,7 @@ cd server (请先启动自己的mongoDB数据库)
 
 cnpm i
 
-npm run initData
+npm run init
 
 npm start
 
