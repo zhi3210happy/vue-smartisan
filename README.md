@@ -23,6 +23,14 @@ cnpm i
 
 npm run dev
 
+cd server (请先启动自己的mongoDB数据库)
+
+cnpm i
+
+npm run initData
+
+npm start
+
 // 如果运行出现代理错误 请确保 config 文件下 index.js proxyTable代理正确
 
 // 直接运行代理应为
