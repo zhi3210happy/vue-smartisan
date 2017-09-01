@@ -10,9 +10,8 @@
           </div>
           <div class="right-box">
             <div class="nav-list">
-              <router-link to="goods">全部商品</router-link>
+              <router-link to="goods">在线商城</router-link>
               <router-link to="/">坚果 Pro</router-link>
-              <router-link to="/">Smartisan M1 / M1L</router-link>
               <router-link to="/">Smartisan OS</router-link>
               <router-link to="/">欢喜云</router-link>
               <router-link to="/">应用下载</router-link>
@@ -124,7 +123,25 @@
                   <router-link to="/">首页</router-link>
                 </li>
                 <li>
-                  <router-link to="/goods">全部商品</router-link>
+                  <router-link to="/goods">手机</router-link>
+                </li>
+                <li>
+                  <router-link to="/">“足迹系列”手感膜</router-link>
+                </li>
+                <li>
+                  <router-link to="">官方配件</router-link>
+                </li>
+                <li>
+                  <router-link to="">周边产品</router-link>
+                </li>
+                <li>
+                  <router-link to="">第三方配件</router-link>
+                </li>
+                <li>
+                  <router-link to="">全部商品</router-link>
+                </li>
+                <li>
+                  <router-link to="">服务</router-link>
                 </li>
               </ul>
               <div></div>
@@ -857,6 +874,9 @@
         }
       }
       li {
+        :hover{
+          color:rgba(0, 0, 255, .6);
+        }
         position: relative;
         float: left;
         padding-left: 2px;
