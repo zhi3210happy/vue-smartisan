@@ -3,6 +3,7 @@
     <y-header></y-header>
     <router-view class="main"></router-view>
     <y-footer></y-footer>
+    <back-top></back-top>
     <!--抛物图片-->
     <transition @after-enter='afterEnter' @before-enter="beforeEnter">
       <!--整张图片-->
@@ -16,6 +17,7 @@
 <script>
   import YHeader from '/common/header'
   import YFooter from '/common/footer'
+  import BackTop from '/common/BackTop'
   import { mapState, mapMutations } from 'vuex'
   export default {
     data () {
@@ -56,7 +58,8 @@
     },
     components: {
       YHeader,
-      YFooter
+      YFooter,
+      BackTop
     }
   }
 </script>

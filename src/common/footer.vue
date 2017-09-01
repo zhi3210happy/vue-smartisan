@@ -20,7 +20,6 @@
               <span class="info-question"></span>在线帮助</a>
           </li>
         </div>
-        <div class="language"></div>
       </div>
       <div class="copyright">
         <span>Copyright © 2017, Smartisan Digital Co., Ltd. All Rights Reserved.北京锤子数码科技有限公司</span>
@@ -44,6 +43,35 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      footerlist: [{
+        'dt': '订单服务',
+        'dl': ['购买方式', '支付方式', '送货政策']
+      }, {
+        'dt': '服务支持',
+        'dl': ['售后服务', '维修门店', '零售门店']
+      }, {
+        'dt': '自助服务',
+        'dl': ['热点咨询', '预约购买', '订单物流']
+      }, {
+        'dt': '媒体中心',
+        'dl': ['新闻动态', '官方视频', '图片资源']
+      }, {
+        'dt': '关于公司',
+        'dl': ['公司简介', '加入我们', '联系我们']
+      }, {
+        'dt': '关注我们',
+        'dl': ['新浪微博', '官方微信', '官方贴吧']
+      }
+      ]
+    }
+  }
+}
+</script>
+
 <style lang="scss" rel="stylesheet/scss" scoped>
 .clearfix:after {
   content: "\200B";
@@ -73,16 +101,17 @@
           padding: 0 0 14px;
         }
 
-        ul{
-         margin-top:-2px;  
+        ul {
+          margin-top: -2px;
           li {
-          font-size: 12px;
-          color: #c3c3c3;
-          padding: 4px 0;
-          a {
-            color: #969696;
+            font-size: 12px;
+            color: #c3c3c3;
+            padding: 4px 0;
+            a {
+              color: #969696;
+            }
           }
-        }} 
+        }
       }
 
 
@@ -106,7 +135,7 @@
         .online {
           clear: both;
           width: 241px;
-          margin-top:-3px;
+          margin-top: -3px;
           font-size: 12px;
           line-height: 18px;
           color: #c3c3c3;
@@ -128,7 +157,7 @@
             border-radius: 5px;
             .info-question {
               display: inline-block;
-              width: 16px; 
+              width: 16px;
               height: 32px;
               font-family: SmartisanIconFont;
               vertical-align: middle;
@@ -179,33 +208,3 @@
   }
 }
 </style>
-<script>
-export default {
-  data () {
-    return {
-      footerlist: [{
-        'dt': '订单服务',
-        'dl': ['购买方式', '支付方式', '送货政策']
-      }, {
-        'dt': '服务支持',
-        'dl': ['售后服务', '维修门店', '零售门店']
-      }, {
-        'dt': '自助服务',
-        'dl': ['热点咨询', '预约购买', '订单物流']
-      }, {
-        'dt': '媒体中心',
-        'dl': ['新闻动态', '官方视频', '图片资源']
-      }, {
-        'dt': '关于公司',
-        'dl': ['公司简介', '加入我们', '联系我们']
-      }, {
-        'dt': '关注我们',
-        'dl': ['新浪微博', '官方微信', '官方贴吧']
-      }
-      ]
-    }
-  },
-  components: {
-  }
-}
-</script>

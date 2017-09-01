@@ -2,6 +2,11 @@
 
 module.exports = {
   root: true,
+  "globals" : {
+    "window":true,
+    "document":true,
+    "$":true
+  },
   parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module'
@@ -23,7 +28,10 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    "no-trailing-spaces": 1
+    "no-trailing-spaces": 0,
+    "indent":0,
+    "space-before-function-paren":0,
+    "spaced-comment":0
     // "semi": [2, "always"]
   }
 }
