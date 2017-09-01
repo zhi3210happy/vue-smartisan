@@ -3,10 +3,10 @@
     <div class="container">
       <div class="siteinfo">
         <ul class="footer-nav clearfix">
-          <li v-for="item in footerlist">
+          <li v-for="(item,index) in footerlist" :key="index">
             <h3>{{item.dt}}</h3>
             <ul>
-              <li v-for="dlitem in item.dl">
+              <li v-for="(dlitem,index) in item.dl" :key="index">
                 <a href="#">{{dlitem}}</a>
               </li>
             </ul>

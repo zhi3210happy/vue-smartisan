@@ -1,6 +1,6 @@
 <template>
   <div class="good-item">
-    <div style="">
+    <div>
       <div class="good-img">
         <router-link :to="'goodsDetails?productId='+msg.productId">
           <img v-lazy="msg.productImageBig" :alt="msg.productName">

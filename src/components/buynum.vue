@@ -9,7 +9,7 @@
       <span class="num">
         <input type="text"
                :class="{show:show}"
-               v-model="Num>=limit?limit:Num"
+               v-model="numChange"
                @blur="blur()"
                maxlength="2">
                   <ul ref="ul">
@@ -39,13 +39,21 @@
         default: 10
       }
     },
-    computed: {},
     data () {
       return {
         show: true,
         flag: true,
         Num: this.num,
         numList: []
+      }
+    },
+    computed: {
+      numChange () {
+        if (this.Num >= this.limit) {
+          return this.limit
+        } else {
+          return this.Num
+        }
       }
     },
     methods: {
