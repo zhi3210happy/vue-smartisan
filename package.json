@@ -18,7 +18,8 @@
     "vue-infinite-scroll": "^2.0.1",
     "vue-lazyload": "^1.0.5",
     "vue-router": "^2.3.1",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "vue-awesome-swiper":"^2.6.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
