@@ -10,7 +10,23 @@ vue2 + vuex + vue-router + webpack + ES6 + axios + sass + flex + svg + express +
 
 ## 关于部署
 
-使用 nginx 做反向代理，解决跨域问题.
+
+nodejs express配置
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+nginx配置
+location /{
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'OPTION, POST, GET';
+    add_header 'Access-Control-Allow-Headers' 'X-Requested-With, Content-Type';
+}
 
 ## 项目运行
 
