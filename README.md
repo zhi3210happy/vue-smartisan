@@ -10,8 +10,8 @@ vue2 + vuex + vue-router + webpack + ES6 + axios + sass + flex + svg + express +
 
 ## 关于部署
 
-
-nodejs express配置
+#### nodejs express配置
+````javascript
 app.all('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
@@ -19,15 +19,17 @@ app.all('/', function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+`````
 
-nginx配置
+#### nginx配置
+````javascript
 location /{
     add_header 'Access-Control-Allow-Origin' '*';
     add_header 'Access-Control-Allow-Credentials' 'true';
     add_header 'Access-Control-Allow-Methods' 'OPTION, POST, GET';
     add_header 'Access-Control-Allow-Headers' 'X-Requested-With, Content-Type';
 }
-
+`````
 ## 项目运行
 
 ```txt
