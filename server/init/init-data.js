@@ -1,6 +1,6 @@
 // 初始化数据库
-var getGoods = require('./getGoods')
-let getAdmin = require('./admin')
+const getGoods = require('./getGoods')
+const getAdmin = require('./admin')
 
 getGoods()
 getAdmin()
