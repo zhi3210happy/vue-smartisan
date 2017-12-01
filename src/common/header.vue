@@ -23,7 +23,7 @@
                         span.avatar(:style="{backgroundImage:'url('+userInfo.info.avatar+')'}")
                       p.name {{userInfo.info.name}}
                       each router,i in {'/user/orderList':'我的订单','/user/information':'账号资料','/user/addressList':'收货地址','/user/support':'售后服务','/user/coupon':'我的优惠','#':'退出'}
-                        li(key='i')  
+                        li(key=i)  
                           router-link(to=i) #{router}
             .shop.pr(@mouseover='cartShowState(true)', @mouseout='cartShowState(false)', ref='positionMsg')
               router-link(to='cart')
