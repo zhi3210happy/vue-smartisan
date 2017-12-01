@@ -1,20 +1,15 @@
-<template>
-  <div class="item" id="product.spu.id">
-    <div class="img-box">
-      <img :src="product.spu.sku_info[0].ali_image" alt="">
-    </div>
-    <div class="info">
-      <h6 class="ellipsis">{{product.spu.sku_info[0].title}}</h6>
-      <p>{{product.spu.sku_info[0].sub_title}}</p>
-    </div>
-    <p class="price">
-      <i>¥</i>
-      <span>{{product.spu.price}}</span>
-    </p>
-    <ul class="dot-list">
-      <li></li>
-    </ul>
-  </div>
+<template lang="pug">
+.item(id='product.spu.id')
+  .img-box
+    img(:src='product.spu.sku_info[0].ali_image', alt='')
+  .info
+    h6.ellipsis {{product.spu.sku_info[0].title}}
+    p {{product.spu.sku_info[0].sub_title}}
+  p.price
+    i ¥
+    span {{product.spu.price}}
+  ul.dot-list
+    li
 </template>
 <script>
   export default {

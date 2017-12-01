@@ -1,9 +1,8 @@
-<template>
-    <transition name="fadeInUp">
-        <div class="backTop" v-if="scroll">
-            <i @click="backTop" class="icon-arrow-up"></i>
-        </div>
-    </transition>
+<template lang="pug">
+transition(name='fadeInUp')
+  .backTop(v-if='scroll')
+    i.icon-arrow-up(@click='backTop')
+
 </template>
 
 <script>
@@ -15,9 +14,9 @@ export default {
     },
     methods: {
         backTop() {
-            var top = document.body.scrollTop
-            var speed = 150
-            var timer = setInterval(() => {
+            let top = document.body.scrollTop
+            let speed = 150
+            let timer = setInterval(() => {
                 document.body.scrollTop = top -= speed
                 if (top <= 0) {
                     top = 0
@@ -28,8 +27,13 @@ export default {
     },
     mounted() {     //使用箭头函数后，内层this会查找外层的非箭头函数的this。
         window.onscroll = () => {
-            var top = document.body.scrollTop
-            if (top > 400) {
+            let scrollTop = 0 
+	        if (document.documentElement && document.documentElement.scrollTop)	{ 
+		        scrollTop = document.documentElement.scrollTop 
+	        } else if (document.body) { 
+		        scrollTop = document.body.scrollTop
+	        } 
+            if (scrollTop> 800) {
                 this.scroll = true
             } else {
                 this.scroll = false

@@ -1,29 +1,19 @@
-<template>
-  <div class="good-item">
-    <div>
-      <div class="good-img">
-        <router-link :to="'goodsDetails?productId='+msg.productId">
-          <img v-lazy="msg.productImageBig" :alt="msg.productName">
-        </router-link>
-      </div>
-      <h6 class="good-title">{{msg.productName}}</h6>
-      <h3 class="sub-title ellipsis">{{msg.sub_title}}</h3>
-      <div class="good-price pr">
-        <div class="ds pa">
-          <router-link :to="'goodsDetails?productId='+msg.productId">
-            <y-button text="查看详情" style="margin: 0 5px"></y-button>
-          </router-link>
-          <y-button text="加入购物车"
-                    style="margin: 0 5px"
-                    @btnClick="_addCart(msg.productId,msg.salePrice,msg.productName,msg.productImageBig)"
-                    classStyle="main-btn"
-          ></y-button>
-        </div>
-        <p><span style="font-size: 16px">￥</span>
-          {{msg.salePrice}}</p>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+.good-item
+  div
+    .good-img
+      router-link(:to="'goodsDetails?productId='+msg.productId")
+        img(v-lazy='msg.productImageBig', :alt='msg.productName')
+    h6.good-title {{msg.productName}}
+    h3.sub-title.ellipsis {{msg.sub_title}}
+    .good-price.pr
+      .ds.pa
+        router-link(:to="'goodsDetails?productId='+msg.productId")
+          y-button(text='查看详情', style='margin: 0 5px')
+        y-button(text='加入购物车', style='margin: 0 5px', @btnClick='_addCart(msg.productId,msg.salePrice,msg.productName,msg.productImageBig)', classStyle='main-btn')
+      p
+        span(style='font-size: 16px') ￥
+        |           {{msg.salePrice}}
 </template>
 <script>
   import YButton from '/components/YButton'
@@ -52,7 +42,7 @@
             this.ADD_CART({productId: id, productPrice: price, productName: name, productImg: img})
           }
           // 加入购物车动画
-          var dom = event.target
+          const dom = event.target
           // 获取点击的坐标
           let elLeft = dom.getBoundingClientRect().left + (dom.offsetWidth / 2)
           let elTop = dom.getBoundingClientRect().top + (dom.offsetHeight / 2)

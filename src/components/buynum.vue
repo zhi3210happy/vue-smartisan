@@ -1,25 +1,14 @@
-<template>
-  <!--数量-->
-  <div class="item-cols-num clearfix">
-    <div class="select">
-      <span class="down"
-            @click.stop.prevent="down()"
-            :class="{'down-disabled':Num<=1}">-
-      </span>
-      <span class="num">
-        <input type="text"
-               :class="{show:show}"
-               v-model="numChange"
-               @blur="blur()"
-               maxlength="2">
-                  <ul ref="ul">
-                    <li v-for="(i,index) in numList" :key="index">{{i}}</li>
-                  </ul>
-      </span>
-      <span class="up" :class="{'up-disabled':Num>=limit}"
-            @click.stop.prevent="up()">+</span>
-    </div>
-  </div>
+<template lang="pug">
+// 数量
+.item-cols-num.clearfix
+  .select
+    span.down(@click.stop.prevent='down()', :class="{'down-disabled':Num<=1}")
+      | -
+    span.num
+      input(type='text', :class='{show:show}', v-model='numChange', @blur='blur()', maxlength='2')
+      ul(ref='ul')
+        li(v-for='(i,index) in numList', :key='index') {{i}}
+    span.up(:class="{'up-disabled':Num>=limit}", @click.stop.prevent='up()') +
 </template>
 <script>
   export default {

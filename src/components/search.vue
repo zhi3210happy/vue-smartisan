@@ -1,11 +1,9 @@
-<template>
-  <div class="search-box">
-    <div class="search">
-      <input type="text" class="text">
-      <button><i class="el-icon-search"></i></button>
-    </div>
-  </div>
-
+<template lang="pug">
+.search-box
+  .search
+    input.text(type='text')
+    button
+      i.el-icon-search
 </template>
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/style/theme";

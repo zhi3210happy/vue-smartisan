@@ -12,7 +12,6 @@
           <router-link to="/home">
             <y-button text="继续选购" style="width: 150px;height: 50px;line-height: 48px;font-size: 20px"
                       classStyle="main-btn"></y-button>
-
           </router-link>
         </div>
       </div>

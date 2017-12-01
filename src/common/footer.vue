@@ -1,47 +1,33 @@
-<template>
-  <div class="footer">
-    <div class="container">
-      <div class="siteinfo">
-        <ul class="footer-nav clearfix">
-          <li v-for="(item,index) in footerlist" :key="index">
-            <h3>{{item.dt}}</h3>
-            <ul>
-              <li v-for="(dlitem,index) in item.dl" :key="index">
-                <a href="#">{{dlitem}}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div class="service">
-          <p>400-619-0909</p>
-          <li class="time">周一至周日9:00-18:00(仅收市话费)</li>
-          <li class="online">
-            <a href="">
-              <span class="info-question"></span>在线帮助</a>
-          </li>
-        </div>
-      </div>
-      <div class="copyright">
-        <span>Copyright © 2017, Smartisan Digital Co., Ltd. All Rights Reserved.北京锤子数码科技有限公司</span>
-        <ul class="firstul clearfix">
-          <li>
-            <a href="#">法律声明</a>
-          </li>
-          <li>
-            <a href="#">隐私条款</a>
-          </li>
-          <li>
-            <a href="#">开发者中心</a>
-          </li>
-        </ul>
-        <ul class="secondul">
-          <li>京ICP备14041720号-1</li>
-          <li>京ICP证140622号</li>
-          <li>京公网安备11010502025474</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+.footer
+  .container
+    .siteinfo
+      ul.footer-nav.clearfix
+        li(v-for='(item,index) in footerlist', :key='index')
+          h3 {{item.dt}}
+          ul
+            li(v-for='(dlitem,index) in item.dl', :key='index')
+              a(href='#') {{dlitem}}
+      .service
+        p 400-619-0909
+        li.time 周一至周日9:00-18:00(仅收市话费)
+        li.online
+          a(href='')
+            span.info-question
+            | 在线帮助
+    .copyright
+      span Copyright © 2017, Smartisan Digital Co., Ltd. All Rights Reserved.北京锤子数码科技有限公司
+      ul.firstul.clearfix
+        li
+          a(href='#') 法律声明
+        li
+          a(href='#') 隐私条款
+        li
+          a(href='#') 开发者中心
+      ul.secondul
+        li 京ICP备14041720号-1
+        li 京ICP证140622号
+        li 京公网安备11010502025474
 </template>
 <script>
 export default {

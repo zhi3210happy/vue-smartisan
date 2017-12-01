@@ -1,7 +1,6 @@
-<template>
-  <div id="app">
-    <router-view class="main"></router-view>
-  </div>
+<template lang="pug">
+  #app
+    router-view.main
 </template>
 <script>
   export default {

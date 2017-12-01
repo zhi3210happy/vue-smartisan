@@ -1,64 +1,46 @@
 <!--商品详情-->
-<template>
-  <div class="w store-content">
-    <div class="gray-box">
-      <div class="gallery-wrapper">
-        <div class="gallery">
-          <div class="thumbnail">
-            <ul>
-              <li v-for="(item,index) in small" :class="{on:big===item}" @click="big=item" :key="index" >
-                <img v-lazy="item" :alt="product.productName">
-              </li>
-            </ul>
-          </div>
-          <div class="thumb">
-            <div class="big">
-              <img :src="big" :alt="product.productName">
-            </div>
-          </div>
-        </div>
-      </div>
+<template lang="pug">
+  .w.store-content
+    .gray-box
+      .gallery-wrapper
+        .gallery
+          .thumbnail
+            ul
+              li(v-for="(item,index) in small" :class="{on:big===item}" @click="big=item" @key="index")
+                img(v-lazy="item" :alt="product.productName")
+          .thumb
+            .big
+              img(:src="big" :alt="product.productName")
+
       <!--右边-->
-      <div class="banner">
-        <div class="sku-custom-title">
-          <h4>{{product.productName}}</h4>
-          <h6>
-            <span>{{product.sub_title}}</span>
-            <span class="price">
-              <em>¥</em><i>{{product.salePrice}}</i></span>
-          </h6>
-        </div>
-        <div class="num">
-          <span class="params-name">数量</span>
-          <buy-num @edit-num="editNum" :limit="Number(product.limit_num)"></buy-num>
-        </div>
-        <div class="buy">
-          <y-button text="加入购物车"
+      .banner
+        .sku-custom-title
+          h4 {{product.productName}}
+          h6
+            span {{product.sub_title}}
+            span.price
+              em ¥
+              i {{product.salePrice}}
+        .num
+          span.params-name 数量
+          buy-num(@edit-num="editNum" :limit="Number(product.limit_num)")
+        .buy
+          y-button(text="加入购物车"
                     @btnClick="addCart(product.productId,product.salePrice,product.productName,product.productImageBig)"
                     classStyle="main-btn"
-                    style="width: 145px;height: 50px;line-height: 48px"></y-button>
-          <y-button text="现在购买"
+                    style="width: 145px;height: 50px;line-height: 48px")
+          y-button(text="现在购买"
                     @btnClick="checkout(product.productId)"
-                    style="width: 145px;height: 50px;line-height: 48px"></y-button>
-        </div>
-      </div>
-    </div>
+                    style="width: 145px;height: 50px;line-height: 48px")
     <!--产品信息-->
-    <div class="item-info">
-      <y-shelf title="产品信息">
-        <div slot="content">
-          <div class="img-item" v-if="productMsg">
-            <img v-for="(item,index) in productMsg.pieces_num" :key="index"
+    .item-info
+      y-shelf(title="产品信息")
+        div(slot="content")
+          .img-item(v-if="productMsg")
+            img(v-for="(item,index) in productMsg.pieces_num" :key="index"
                  v-lazy="`${productMsg.url}?x-oss-process=image/resize,w_2440/indexcrop,y_1440,i_${item-1}/quality,Q_100/format,webp`"
-                 alt="">
-          </div>
-          <div class="no-info" v-else>
-            该产品暂无内容
-          </div>
-        </div>
-      </y-shelf>
-    </div>
-  </div>
+                 alt="")
+          .no-info(v-else) 该产品暂无内容
 </template>
 <script>
   import { productDet, addCart } from '/api/goods'
@@ -113,7 +95,7 @@
             })
           }
           // 加入购物车动画
-          var dom = event.target
+          const dom = event.target
           // 获取点击的坐标
           let elLeft = dom.getBoundingClientRect().left + (dom.offsetWidth / 2)
           let elTop = dom.getBoundingClientRect().top + (dom.offsetHeight / 2)

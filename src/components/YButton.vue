@@ -1,10 +1,5 @@
-<template>
-  <input :type="inputType"
-         readonly
-         :class="classStyle"
-         @click="btnClick($event)"
-         :disabled="classStyle==='disabled-btn'"
-         :value="text">
+<template lang="pug">
+  input(:type='inputType', readonly='', :class='classStyle', @click='btnClick($event)', :disabled="classStyle==='disabled-btn'", :value='text')
 </template>
 <script>
   export default {

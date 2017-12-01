@@ -1,140 +1,85 @@
-<template>
-  <div class="checkout">
-    <y-header>
-      <div slot="nav"></div>
-    </y-header>
-    <div class="w" style="padding-top: 40px;">
-      <!-- 收货地址 -->
-      <y-shelf title="收货信息">
-        <div slot="content">
-          <ul class="address-item-list clearfix">
-            <li v-for="(item,i) in addList"
-                :key="i"
-                class="address pr"
-                :class="{checked:addressId === item.addressId}"
-                @click="defaultAddress(item.addressId)">
-           <span v-if="addressId === item.addressId" class="pa">
-             <svg viewBox="0 0 1473 1024" width="17.34375" height="12">
-             <path
-               d="M1388.020 57.589c-15.543-15.787-37.146-25.569-61.033-25.569s-45.491 9.782-61.023 25.558l-716.054 723.618-370.578-374.571c-15.551-15.769-37.151-25.537-61.033-25.537s-45.482 9.768-61.024 25.527c-15.661 15.865-25.327 37.661-25.327 61.715 0 24.053 9.667 45.849 25.327 61.715l431.659 436.343c15.523 15.814 37.124 25.615 61.014 25.615s45.491-9.802 61.001-25.602l777.069-785.403c15.624-15.868 25.271-37.66 25.271-61.705s-9.647-45.837-25.282-61.717M1388.020 57.589z"
-               fill="#6A8FE5" p-id="1025">
-               </path>
-             </svg>
-             </span>
-              <p>收货人: {{item.userName}} {{item.isDefault ? '(默认地址)' : ''}}</p>
-              <p class="street-name ellipsis">收货地址: {{item.streetName}}</p>
-              <p>手机号码: {{item.tel}}</p>
-              <div class="operation-section">
-                <span class="update-btn" @click="update(item)">修改</span>
-                <span class="delete-btn" :data-id="item.addressId" @click="del(item.addressId)">删除</span>
-              </div>
-            </li>
-
-            <li class="add-address-item" @click="update()">
-              <img src="../../../static/svg/jia.svg" alt="">
-              <p>使用新地址</p>
-            </li>
-          </ul>
-        </div>
-      </y-shelf>
-      <!-- 购物清单 -->
-      <y-shelf title="购物清单">
-        <div slot="content">
-          <div class="box-inner ui-cart">
-            <div>
-              <!--标题-->
-              <div class="cart-table-title">
-                <span class="name">商品信息</span>
-                <span class="subtotal">小计</span>
-                <span class="num">数量</span>
-                <span class="price">单价</span>
-              </div>
-              <!--列表-->
-              <div class="cart-table" v-for="(item,i) in cartList" :key="i" v-if="item.checked === '1'">
-                <div class="cart-group divide pr" :data-productid="item.productId">
-                  <div class="cart-top-items">
-                    <div class="cart-items clearfix">
-                      <!--图片-->
-                      <div class="items-thumb fl">
-                        <img :alt="item.productName"
-                             :src="item.productImg">
-                        <a href="javascript:;" :title="item.productName" target="_blank"></a>
-                      </div>
-                      <!--信息-->
-                      <div class="name hide-row fl">
-                        <div class="name-table">
-                          <a href="javascript:;" :title="item.productName" target="_blank"
-                             v-text="item.productName"></a>
-                          <ul class="attribute">
-                            <li>白色</li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!--商品数量-->
-                      <div>
-                        <!--总价格-->
-                        <div class="subtotal" style="font-size: 14px">¥ {{item.productPrice * item.productNum}}</div>
-                        <!--数量-->
-                        <div class="item-cols-num">
-                          <div class="select">
-                            <span v-text="item.productNum"></span>
-                          </div>
-                        </div>
-                        <!--价格-->
-                        <div class="price">¥ {{item.productPrice}}</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 合计 -->
-            <div class="cart-bottom-bg fix-bottom">
-              <div class="fix-bottom-inner">
-                <div class="shipping">
-                  <div class="shipping-box" style="padding: 0 40px;">
-                    <div class="shipping-total shipping-price"><h4
-                      class="highlight">应付总额：<em>￥{{checkPrice}}</em>
-                    </h4>
-                    </div>
-                  </div>
-                  <y-button class="big-main-btn"
-                            classStyle="main-btn"
-                            style="margin: 0;width: 130px;height: 50px;line-height: 50px;font-size: 16px"
-                            text="提交订单"
-                            @btnClick="payment">
-                  </y-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </y-shelf>
-
-      <y-popup :open="popupOpen" @close='popupOpen=false' :title="popupTitle">
-        <div slot="content" class="md" :data-id="msg.addressId">
-          <div>
-            <input type="text" placeholder="收货人姓名" v-model="msg.userName">
-          </div>
-          <div>
-            <input type="number" placeholder="手机号码" v-model="msg.tel">
-          </div>
-          <div>
-            <input type="text" placeholder="收货地址" v-model="msg.streetName">
-          </div>
-          <div>
-            <span><input type="checkbox" v-model="msg.isDefault" style="margin-right: 5px;">设为默认</span>
-          </div>
-          <y-button text='保存'
-                    class="btn"
-                    :classStyle="btnHighlight?'main-btn':'disabled-btn'"
-                    @btnClick="save({addressId:msg.addressId,userName:msg.userName,tel:msg.tel,streetName:msg.streetName,isDefault:msg.isDefault})">
-          </y-button>
-        </div>
-      </y-popup>
-    </div>
-    <y-footer></y-footer>
-  </div>
+<template lang="pug">
+.checkout
+  y-header
+    div(slot='nav')
+  .w(style='padding-top: 40px;')
+    // 收货地址
+    y-shelf(title='收货信息')
+      div(slot='content')
+        ul.address-item-list.clearfix
+          li.address.pr(v-for='(item,i) in addList', :key='i', :class='{checked:addressId === item.addressId}', @click='defaultAddress(item.addressId)')
+            span.pa(v-if='addressId === item.addressId')
+              svg(viewbox='0 0 1473 1024', width='17.34375', height='12')
+                path(d='M1388.020 57.589c-15.543-15.787-37.146-25.569-61.033-25.569s-45.491 9.782-61.023 25.558l-716.054 723.618-370.578-374.571c-15.551-15.769-37.151-25.537-61.033-25.537s-45.482 9.768-61.024 25.527c-15.661 15.865-25.327 37.661-25.327 61.715 0 24.053 9.667 45.849 25.327 61.715l431.659 436.343c15.523 15.814 37.124 25.615 61.014 25.615s45.491-9.802 61.001-25.602l777.069-785.403c15.624-15.868 25.271-37.66 25.271-61.705s-9.647-45.837-25.282-61.717M1388.020 57.589z', fill='#6A8FE5', p-id='1025')
+            p 收货人: {{item.userName}} {{item.isDefault ? '(默认地址)' : ''}}
+            p.street-name.ellipsis 收货地址: {{item.streetName}}
+            p 手机号码: {{item.tel}}
+            .operation-section
+              span.update-btn(@click='update(item)') 修改
+              span.delete-btn(:data-id='item.addressId', @click='del(item.addressId)') 删除
+          li.add-address-item(@click='update()')
+            img(src='../../../static/svg/jia.svg', alt='')
+            p 使用新地址
+    // 购物清单
+    y-shelf(title='购物清单')
+      div(slot='content')
+        .box-inner.ui-cart
+          div
+            // 标题
+            .cart-table-title
+              span.name 商品信息
+              span.subtotal 小计
+              span.num 数量
+              span.price 单价
+            // 列表
+            .cart-table(v-for='(item,i) in cartList', :key='i', v-if="item.checked === '1'")
+              .cart-group.divide.pr(:data-productid='item.productId')
+                .cart-top-items
+                  .cart-items.clearfix
+                    // 图片
+                    .items-thumb.fl
+                      img(:alt='item.productName', :src='item.productImg')
+                      a(href='javascript:;', :title='item.productName', target='_blank')
+                    // 信息
+                    .name.hide-row.fl
+                      .name-table
+                        a(href='javascript:;', :title='item.productName', target='_blank', v-text='item.productName')
+                        ul.attribute
+                          li 白色
+                    // 商品数量
+                    div
+                      // 总价格
+                      .subtotal(style='font-size: 14px') ¥ {{item.productPrice * item.productNum}}
+                      // 数量
+                      .item-cols-num
+                        .select
+                          span(v-text='item.productNum')
+                      // 价格
+                      .price ¥ {{item.productPrice}}
+          // 合计
+          .cart-bottom-bg.fix-bottom
+            .fix-bottom-inner
+              .shipping
+                .shipping-box(style='padding: 0 40px;')
+                  .shipping-total.shipping-price
+                    h4.highlight
+                      | 应付总额：
+                      em ￥{{checkPrice}}
+                y-button.big-main-btn(classStyle='main-btn', style='margin: 0;width: 130px;height: 50px;line-height: 50px;font-size: 16px', text='提交订单', @btnClick='payment')
+    y-popup(:open='popupOpen', @close='popupOpen=false', :title='popupTitle')
+      .md(slot='content', :data-id='msg.addressId')
+        div
+          input(type='text', placeholder='收货人姓名', v-model='msg.userName')
+        div
+          input(type='number', placeholder='手机号码', v-model='msg.tel')
+        div
+          input(type='text', placeholder='收货地址', v-model='msg.streetName')
+        div
+          span
+            input(type='checkbox', v-model='msg.isDefault', style='margin-right: 5px;')
+            | 设为默认
+        y-button.btn(text='保存', :classStyle="btnHighlight?'main-btn':'disabled-btn'", @btnClick='save({addressId:msg.addressId,userName:msg.userName,tel:msg.tel,streetName:msg.streetName,isDefault:msg.isDefault})')
+  y-footer
 </template>
 <script>
   import { getCartList, addressList, addressUpdate, addressAdd, addressDel, productDet } from '/api/goods'

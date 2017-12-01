@@ -1,35 +1,23 @@
-<template>
-  <div>
-    <div class="banner">
-      <swiper :options="swiperOption">
-        <swiper-slide v-for="(item,index) in bgimg" :key="index">
-          <div class="bg" ref="bg" :style="item[0]">
-            <span class="img a" :style="item[1]"></span>
-            <span class="img b" :style="item[2]"></span>
-          </div>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
-    </div>
+<template lang="pug">
+  div
+    .banner
+      swiper(:options="swiperOption" )
+        swiper-slide( v-for="(item,index) in bgimg" :key="index" )
+          .bg( ref="bg" :style="item[0]" )
+            .img.a( :style="item[1]" )
+            .img.b( :style="item[2]" )
+        .swiper-pagination( slot="pagination" )
 
-    <section class="w mt30 clearfix">
-      <y-shelf title="热门商品">
-        <div slot="content" class="hot">
-          <mall-goods :msg="item" v-for="(item,i) in hot" :key="i"></mall-goods>
-        </div>
-      </y-shelf>
-    </section>
-    <section class="w mt30 clearfix" v-for="(item,i) in floors" :key="i">
-      <y-shelf :title="item.title">
-        <div slot="content" class="floors">
-          <div class="imgbanner">
-            <img v-lazy="floors[i].image.image" :alt="item.title">
-          </div>
-          <mall-goods :msg="tab" v-for="(tab,i) in item.tabs" :key="i"></mall-goods>
-        </div>
-      </y-shelf>
-    </section>
-  </div>
+    section.w.mt3.clearfix
+      y-shelf( title="热门商品" )
+        .hot( slot="content" )
+          mall-goods( :msg="item" v-for="(item,i) in hot" :key="i" )
+    section.w.mt30.clearfix( v-for="(item,i) in floors" :key="i" )
+      y-shelf( :title="item.title" )
+        .floors( slot="content" )
+          .imgbanner
+            img(　v-lazy="floors[i].image.image" :alt="item.title" )
+          mall-goods( :msg="tab" v-for="(tab,i) in item.tabs" :key="i" )
 </template>
 <script>
 import { productHome } from '/api/index.js'

@@ -1,13 +1,9 @@
-<template>
-  <div>
-    <y-shelf title="以旧换新">
-      <div slot="content">
-        <div style="padding: 100px 0;text-align: center">
-          此页面暂未开发
-        </div>
-      </div>
-    </y-shelf>
-  </div>
+<template lang="pug">
+div
+  y-shelf(title='以旧换新')
+    div(slot='content')
+      div(style='padding: 100px 0;text-align: center')
+        | 此页面暂未开发
 </template>
 <script>
   import YShelf from '/components/shelf'

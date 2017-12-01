@@ -1,157 +1,83 @@
-<template>
-  <div class="header-box">
-    <div>
-      <header class="w">
-        <div class="w-box">
-          <div class="nav-logo">
-            <h1>
-              <router-link to="/" title="锤子科技官网">Smartisan</router-link>
-            </h1>
-          </div>
-          <div class="right-box">
-            <div class="nav-list">
-              <router-link to="goods">在线商城</router-link>
-              <router-link to="/">坚果 Pro</router-link>
-              <router-link to="/">Smartisan OS</router-link>
-              <router-link to="/">欢喜云</router-link>
-              <router-link to="/">应用下载</router-link>
-              <router-link to="/">官方论坛</router-link>
-            </div>
-            <div class="nav-aside" ref="aside" :class="{fixed:st}">
-              <div class="user pr">
-                <router-link to="user">个人中心</router-link>
-                <!--用户信息显示-->
-                <div class="nav-user-wrapper pa" v-if="login">
-                  <div class="nav-user-list">
-                    <ul>
-                      <!--头像-->
-                      <li class="nav-user-avatar">
-                        <div>
-                          <span class="avatar" :style="{backgroundImage:'url('+userInfo.info.avatar+')'}">
-                          </span>
-                        </div>
-                        <p class="name">{{userInfo.info.name}}</p>
-                      </li>
-                      <li>
-                        <router-link to="/user/orderList">我的订单</router-link>
-                      </li>
-                      <li>
-                        <router-link to="/user/information">账号资料</router-link>
-                      </li>
-                      <li>
-                        <router-link to="/user/addressList">收货地址</router-link>
-                      </li>
-                      <li>
-                        <router-link to="/user/support">售后服务</router-link>
-                      </li>
-                      <li>
-                        <router-link to="/user/coupon">我的优惠</router-link>
-                      </li>
+<template lang="pug">
+.header-box
+  div
+    header.w
+      .w-box
+        .nav-logo
+          h1
+            router-link(to='/', title='锤子科技官网') Smartisan
+        .right-box
+          .nav-list
+            each router,i in {'goods':'在线商城','/1':'坚果 Pro','/2':'Smartisan OS','/3':'欢喜云','/4':'应用下载','/5':'官方论坛'}
+              router-link(to=i key=i) #{router}
+          .nav-aside(ref='aside', :class='{fixed:st}')
+            .user.pr
+              router-link(to='user') 个人中心
+              // 用户信息显示
+              .nav-user-wrapper.pa(v-if='login')
+                .nav-user-list
+                  ul
+                    // 头像
+                    li.nav-user-avatar
+                      div
+                        span.avatar(:style="{backgroundImage:'url('+userInfo.info.avatar+')'}")
+                      p.name {{userInfo.info.name}}
+                      each router,i in {'/user/orderList':'我的订单','/user/information':'账号资料','/user/addressList':'收货地址','/user/support':'售后服务','/user/coupon':'我的优惠','#':'退出'}
+                        li(key='i')  
+                          router-link(to=i) #{router}
+            .shop.pr(@mouseover='cartShowState(true)', @mouseout='cartShowState(false)', ref='positionMsg')
+              router-link(to='cart')
+              span.cart-num
+                i.num(:class='{no:totalNum <= 0,move_in_cart:receiveInCart}') {{totalNum}}
+              // 购物车显示块
+              .nav-user-wrapper.pa.active(v-show='showCart')
+                .nav-user-list
+                  .full(v-show='totalNum')
+                    // 购物列表
+                    .nav-cart-items
+                      ul
+                        li.clearfix(v-for='(item,i) in cartList', :key='i')
+                          .cart-item
+                            .cart-item-inner
+                              router-link(:to="'goodsDetails?productId='+item.productId")
+                                .item-thumb
+                                  img(:src='item.productImg')
+                                .item-desc
+                                  .cart-cell
+                                    h4
+                                      a(href='', v-text='item.productName')
+                                    p.attrs
+                                      span 白色
+                                    h6
+                                      span.price-icon ¥
+                                      span.price-num {{item.productPrice}}
+                                      span.item-num x {{item.productNum}}
+                              .del-btn.del(@click='delGoods(item.productId)') 删除
+                    // 总件数
+                    .nav-cart-total
+                      p
+                        | 共 
+                        strong {{totalNum}}
+                        |  件商品
+                      h5
+                        | 合计：
+                        span.price-icon ¥
+                        span.price-num {{totalPrice}}
+                      h6
+                        y-button(classStyle='main-btn', style='height: 40px;width: 100%;margin: 0;color: #fff;font-size: 14px;line-height: 38px', text='去购物车', @btnClick='toCart')
+                  .cart-con(v-show='!totalNum', style='height: 313px;text-align: center')
+                    p 你的购物车竟然是空的!
+    slot(name='nav')
+      .nav-sub(:class='{fixed:st}')
+        .nav-sub-bg
+        .nav-sub-wrapper(:class='{fixed:st}')
+          .w
+            ul.nav-list
+              each router,i in {'goods':'首页','/1':'手机','/2':'“足迹系列”手感膜','/3':'官方配件','/4':'周边产品','/5':'第三方配件','/6':'全部商品','/7':'服务'}
+                li(key=i)
+                  router-link(to=i) #{router}
+            div
 
-
-                      <li>
-                        <a href="javascript:;" @click="_loginOut">退出</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="shop pr" @mouseover="cartShowState(true)" @mouseout="cartShowState(false)"
-                   ref="positionMsg">
-                <router-link to="cart"></router-link>
-                <span class="cart-num">
-                  <i class="num" :class="{no:totalNum <= 0,move_in_cart:receiveInCart}">{{totalNum}}</i></span>
-                <!--购物车显示块-->
-                <div class="nav-user-wrapper pa active" v-show="showCart">
-                  <div class="nav-user-list">
-                    <div class="full" v-show="totalNum">
-                      <!--购物列表-->
-                      <div class="nav-cart-items">
-                        <ul>
-                          <li class="clearfix" v-for="(item,i) in cartList" :key="i">
-                            <div class="cart-item">
-                              <div class="cart-item-inner">
-                                <router-link :to="'goodsDetails?productId='+item.productId">
-                                  <div class="item-thumb">
-                                    <img :src="item.productImg">
-                                  </div>
-                                  <div class="item-desc">
-                                    <div class="cart-cell"><h4>
-                                      <a href="" v-text="item.productName"></a>
-                                    </h4>
-                                      <p class="attrs"><span>白色</span>
-                                      </p> <h6><span class="price-icon">¥</span><span
-                                        class="price-num">{{item.productPrice}}</span><span
-                                        class="item-num">x {{item.productNum}}</span>
-                                      </h6></div>
-                                  </div>
-                                </router-link>
-                                <div class="del-btn del" @click="delGoods(item.productId)">删除</div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <!--总件数-->
-                      <div class="nav-cart-total"><p>共 <strong>{{totalNum}}</strong> 件商品</p> <h5>合计：<span
-                        class="price-icon">¥</span><span
-                        class="price-num">{{totalPrice}}</span></h5>
-                        <h6>
-                          <y-button classStyle="main-btn"
-                                    style="height: 40px;width: 100%;margin: 0;color: #fff;font-size: 14px;line-height: 38px"
-                                    text="去购物车" @btnClick="toCart"></y-button>
-                        </h6>
-                      </div>
-                    </div>
-                    <div v-show="!totalNum" style="height: 313px;text-align: center" class="cart-con">
-                      <p>你的购物车竟然是空的!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
-      <slot name="nav">
-        <div class="nav-sub" :class="{fixed:st}">
-          <div class="nav-sub-bg"></div>
-          <div class="nav-sub-wrapper" :class="{fixed:st}">
-            <div class="w">
-              <ul class="nav-list">
-                <li>
-                  <router-link to="/">首页</router-link>
-                </li>
-                <li>
-                  <router-link to="/goods">手机</router-link>
-                </li>
-                <li>
-                  <router-link to="/">“足迹系列”手感膜</router-link>
-                </li>
-                <li>
-                  <router-link to="">官方配件</router-link>
-                </li>
-                <li>
-                  <router-link to="">周边产品</router-link>
-                </li>
-                <li>
-                  <router-link to="">第三方配件</router-link>
-                </li>
-                <li>
-                  <router-link to="">全部商品</router-link>
-                </li>
-                <li>
-                  <router-link to="">服务</router-link>
-                </li>
-              </ul>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </slot>
-
-    </div>
-  </div>
 </template>
 <script>
   import YButton from '/components/YButton'
@@ -178,7 +104,7 @@
       ]),
       // 计算价格
       totalPrice () {
-        var totalPrice = 0
+        let totalPrice = 0
         this.cartList && this.cartList.forEach(item => {
           totalPrice += (item.productNum * item.productPrice)
         })
@@ -186,7 +112,7 @@
       },
       // 计算数量
       totalNum () {
-        var totalNum = 0
+        let totalNum = 0
         this.cartList && this.cartList.forEach(item => {
           totalNum += (item.productNum)
         })
@@ -224,7 +150,7 @@
       // 控制顶部
       navFixed () {
         if (this.$route.path === '/goods' || this.$route.path === '/home' || this.$route.path === '/goodsDetails') {
-          var st = document.body.scrollTop
+          let st = document.body.scrollTop
           st >= 100 ? this.st = true : this.st = false
           // 计算小圆当前位置
           let num = document.querySelector('.num')

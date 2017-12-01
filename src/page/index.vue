@@ -1,18 +1,15 @@
-<template>
-  <div>
-    <y-header></y-header>
-    <router-view class="main"></router-view>
-    <y-footer></y-footer>
-    <back-top></back-top>
+<template lang="pug">
+  div
+    y-header
+    router-view.main
+    y-footer
+    back-top
     <!--抛物图片-->
-    <transition @after-enter='afterEnter' @before-enter="beforeEnter">
+    transition( @after-enter='afterEnter' @before-enter="beforeEnter" )
       <!--整张图片-->
-      <div class="move_img" v-if="showMoveImg"
-           :style="{left:(cartPositionL-10) + 'px',top:(cartPositionT-10) + 'px'}">
-        <div><img :src="moveImgUrl"></div>
-      </div>
-    </transition>
-  </div>
+      .move_img( v-if="showMoveImg" :style="{left:(cartPositionL-10) + 'px',top:(cartPositionT-10) + 'px'}")
+        div
+          img(:src="moveImgUrl")
 </template>
 <script>
   import YHeader from '/common/header'

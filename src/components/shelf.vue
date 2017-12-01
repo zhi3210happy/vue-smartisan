@@ -1,16 +1,12 @@
-<template>
-  <div class="gray-box">
-    <div class="title">
-      <h2>{{title}}</h2>
-      <div>
-        <slot name="right"></slot>
-      </div>
-    </div>
-    <!--内容-->
-    <div>
-      <slot name="content"></slot>
-    </div>
-  </div>
+<template lang="pug">
+.gray-box
+  .title
+    h2 {{title}}
+    div
+      slot(name='right')
+  // 内容
+  div
+    slot(name='content')
 </template>
 <script>
   export default {

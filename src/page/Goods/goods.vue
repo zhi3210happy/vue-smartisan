@@ -1,29 +1,20 @@
-<template>
-  <div class="goods">
-    <div class="nav">
-
-      <div class="w">
-        <a href="javascript:;" :class="{active:sortType===1}" @click="reset()">综合排序</a>
-        <a href="javascript:;" @click="sort(1)" :class="{active:sortType===2}">价格从低到高</a>
-        <a href="javascript:;" @click="sort(-1)" :class="{active:sortType===3}">价格从高到低</a>
-        <div class="price-interval">
-          <input type="number" class="input" placeholder="价格" v-model="min">
-          <span style="margin: 0 5px"> - </span>
-          <input type="number" placeholder="价格" v-model="max">
-          <y-button text="确定" classStyle="main-btn" @btnClick="reset" style="margin-left: 10px;"></y-button>
-        </div>
-      </div>
-    </div>
+<template lang="pug">
+  .goods
+    .nav
+      .w
+        a(href="javascript:;" v-bind:class="{active:sortType===1}" v-on:click="reset()") 综合排序
+        a(href="javascript:;" v-on:click="sort(1)" v-bind:class="{active:sortType===2}") 价格从低到高
+        a(href="javascript:;" v-on:click="sort(-1)" v-bind:class="{active:sortType===3}") 价格从高到低
+        .price-interval
+          input.input(type="number" placeholder="价格" v-model="min")
+          span( style="margin: 0 5px") -
+          input( type="number" placeholder="价格" v-model="max")
+          y-button( text="确定" classStyle="main-btn" @btnClick="reset" style="margin-left: 10px;")
 
     <!--商品-->
-    <div class="goods-box w">
-      <mall-goods v-for="(item,i) in computer" :key="i" :msg="item"></mall-goods>
-    </div>
-    <div v-show="!busy" class="w" style="text-align: center;background: #fff" v-infinite-scroll="loadMore"
-         infinite-scroll-disabled="busy" infinite-scroll-distance="100">
-      正在加载中...
-    </div>
-  </div>
+    .goods-box.w
+      mall-goods(v-for="(item,i) in computer" v-bind:key="i" v-bind:msg="item")
+    .w(v-show="!busy" style="text-align: center;background: #fff" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="100") 正在加载中...
 </template>
 <script>
   import {getComputer} from '/api/goods.js'
