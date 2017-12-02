@@ -1,15 +1,15 @@
 # 锤子商城
 
+## 已更新为PUG模板，语法更加简洁。
 
 ## 注意默认请求地址已改为线上地址，爬虫失效
-
 ~~商品数据通过简单的爬虫抓取写入数据库 (eventproxy + superagent).~~
 头像图片是上传到本人的阿里云OSS的。
 __注: 并不是通过proxy代理请求的锤子商城接口__
 
 ## 技术栈
 
-vue2 + vuex + vue-router + webpack + ES6 + axios + sass + flex + svg + express + mongoose + ali-oss
+vue2 + PUG + vuex + vue-router + webpack + ES6 + axios + sass + flex + svg + express + mongoose + ali-oss
 
 ## 关于部署
 
