@@ -1,6 +1,6 @@
 # 锤子商城
 
-## 已更新为PUG模板，语法更加简洁。
+## 已更新为PUG模板，语法更加简洁。包管理改为YARN
 
 ## 注意默认请求地址已改为线上地址，爬虫失效
 ~~商品数据通过简单的爬虫抓取写入数据库 (eventproxy + superagent).~~
@@ -40,13 +40,13 @@ git clone https://github.com/zhi3210happy/vue-smarttisan.git
   
 cd vue-smartisan
 
-cnpm i
+yarn 
 
 npm run dev
 
 cd server (请先启动自己的mongoDB数据库)
 
-cnpm i
+yarn
 
 npm run init
 
