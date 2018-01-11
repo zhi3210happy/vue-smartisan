@@ -1,25 +1,33 @@
 import axios from 'axios'
-axios.defaults.timeout = 5000
-axios.defaults.headers.post['Content-Type'] = 'application/x-www=form-urlencoded'
-export default {
-  fetchGet (url, params = {}) {
-    return new Promise((resolve, reject) => {
-      axios.get(url, params).then(res => {
-        resolve(res.data)
-      }).catch(error => {
-        reject(error)
-        console.log(error)
-      })
+class FetchData {
+  constructor() {
+    this.$http = axios.create({
+      timeout: 5000
     })
-  },
-  fetchPost (url, params = {}) {
-    return new Promise((resolve, reject) => {
-      axios.post(url, params).then(res => {
+    this.headerDefaults = {
+      'Content-Type': 'application/x-www=form-urlencoded'
+    }
+  }
+  fetchGet(url, params = {}) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await this.$http.get(url, params)
         resolve(res.data)
-      }).catch(error => {
+      } catch (error) {
         reject(error)
-        console.log(error)
-      })
+      }
+    })
+  }
+  fetchPost(url, params = {}) {
+    return new Promise(async(resolve, reject) => {
+      try {
+        const res = await this.$http.post(url, params, { ...this.headerDefaults
+        })
+        resolve(res.data)
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 }
+export default new FetchData()

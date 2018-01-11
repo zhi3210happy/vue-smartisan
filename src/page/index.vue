@@ -15,16 +15,21 @@
   import YHeader from '/common/header'
   import YFooter from '/common/footer'
   import BackTop from '/common/BackTop'
-  import { mapState, mapMutations } from 'vuex'
+  import { mapState, mapMutations ,mapActions } from 'vuex'
   export default {
     data () {
       return {}
     },
     computed: {
-      ...mapState(['cartPositionT', 'cartPositionL', 'showMoveImg', 'elLeft', 'elTop', 'moveImgUrl'])
+      ...mapState(['cartPositionT', 'cartPositionL', 'showMoveImg', 'elLeft', 'elTop', 'moveImgUrl','searchData'])
+    },
+    mounted () {
+      this.SEARCH_DATA({data:1})
+      console.log(this.searchData)
     },
     methods: {
-      ...mapMutations(['ADD_ANIMATION']),
+      ...mapMutations(['ADD_ANIMATION','SEARCH_DATA']),
+      ...mapActions(['getSearchData']),
       // 监听图片进入购物车
       listenInCart () {
         this.ADD_ANIMATION({moveShow: false, receiveInCart: true})

@@ -6,11 +6,15 @@ import {
   ADD_ANIMATION,
   SHOW_CART,
   REDUCE_CART,
-  EDIT_CART
+  EDIT_CART,
+  SEARCH_DATA
 } from './mutation-types'
 import { setStore, getStore } from '../utils/storage'
 export default {
   // 网页初始化时从本地缓存获取购物车数据
+  [SEARCH_DATA](state,{data}) {
+   state.searchData=data
+  },
   [INIT_BUYCART] (state) {
     let initCart = getStore('buyCart')
     if (initCart) {
